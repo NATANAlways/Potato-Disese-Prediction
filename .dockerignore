@@ -1,0 +1,7 @@
+archive(2)/
+archive(2).zip
+api/__pycache__/
+potato/__pycache__/
+.vscode/
+.codex
+*.pyc

@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment and secrets
+.env
+.env.*
+*.local
+key_file.json
+*service-account*.json
+
+# Logs and runtime files
+logs/
+*.log
+
+# Dataset and archives
+archive(2)/
+archive(2).zip
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Model artifacts
+*.pth
+*.pt
+*.mar
+model_store/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor and local tool files
+.vscode/
+.idea/
+.codex
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
