@@ -5,7 +5,6 @@ import sys
 
 from fastapi import FastAPI, File, HTTPException, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from google.cloud import storage
 from PIL import Image
 from torchvision import transforms
 import torch
@@ -43,6 +42,8 @@ preprocess = transforms.Compose([
 
 
 def download_model_from_gcs(gcs_uri: str, destination: Path) -> None:
+    from google.cloud import storage
+
     if not gcs_uri.startswith("gs://"):
         raise ValueError("MODEL_GCS_URI must start with gs://")
 

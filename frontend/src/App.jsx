@@ -1,26 +1,27 @@
 import { useState } from "react";
+import "./App.css";
+import ImageUploader from "./components/ImageUploader";
+import PredictionResult from "./components/PredictionResult";
 
-function App(){
-
-
+function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-
 
   function handleFileChange(event) {
     const file = event.target.files[0];
     setSelectedFile(file);
     setResult(null);
 
-    if (file){
+    if (file) {
       setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setPreviewUrl("");
     }
   }
 
-  async function handlePredict(){
-
+  async function handlePredict() {
     if (!selectedFile) {
       alert("Please choose an image first");
       return;
@@ -28,10 +29,10 @@ function App(){
 
     const formData = new FormData();
     formData.append("file", selectedFile);
-    setLoading(true)
+    setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/predict",{
+      const response = await fetch("http://localhost:8000/predict", {
         method: "POST",
         body: formData,
       });
@@ -43,60 +44,30 @@ function App(){
       }
 
       setResult(data);
-    } catch (error){
+    } catch (error) {
       console.error(error);
-      alert(error.message || "Something went wrong. Is the backend running?")
+      alert(error.message || "Something went wrong. Is the backend running?");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
-  
-  
+
   return (
-    <div style={{ padding: "40px", fontFamily: "Arial" }}>
-      <h1>Potato Disease Detector</h1>
+    <main className="app">
+      <div className="app-header">
+        <h1>Potato Disease Detector</h1>
+        <p>Upload a potato leaf image to classify early blight, late blight, or healthy leaves.</p>
+      </div>
 
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <ImageUploader
+        loading={loading}
+        onFileChange={handleFileChange}
+        onPredict={handlePredict}
+        previewUrl={previewUrl}
+      />
 
-      {previewUrl && (
-        <div>
-          <h3>Selected Image</h3>
-          <img
-            src={previewUrl}
-            alt="Selected potato leaf"
-            style={{ width: "300px", marginTop: "10px" }}
-          />
-        </div>
-      )}
-
-      <br />
-
-      <button onClick={handlePredict} disabled={loading}>
-        {loading ? "Predicting..." : "Predict Disease"}
-      </button>
-
-      {result && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>Result</h2>
-          <p>
-            <strong>Disease:</strong> {result.class}
-          </p>
-          <p>
-            <strong>Confidence:</strong>{" "}
-            {(result.confidence * 100).toFixed(2)}%
-          </p>
-
-          <h3>All Predictions</h3>
-          <ul>
-            {Object.entries(result.predictions).map(([name, value]) => (
-              <li key={name}>
-                {name}: {(value * 100).toFixed(2)}%
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+      <PredictionResult result={result} />
+    </main>
   );
 }
 
