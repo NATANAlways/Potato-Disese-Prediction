@@ -6,7 +6,7 @@ This project detects potato leaf disease from an uploaded image. It classifies i
 - `Potato___Late_blight`
 - `Potato___healthy`
 
-![Potato Disease Detector app screenshot](docs/app-screenshot.png)
+![Potato Disease Detector app screenshot](images/app-screenshot.svg)
 
 The project contains a PyTorch CNN model, a FastAPI backend for local inference, a React frontend, and a Google Cloud Function deployment version.
 
