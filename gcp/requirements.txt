@@ -1,0 +1,5 @@
+functions-framework
+pillow
+torch
+torchvision
+google-cloud-storage

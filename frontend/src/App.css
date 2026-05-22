@@ -76,6 +76,15 @@
   font-weight: 700;
   cursor: pointer;
 }
+.clear-button {
+  margin-top: 12px;
+  padding: 12px 18px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #334155;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
 .predict-button:hover:not(:disabled) {
   background: #1a5429;

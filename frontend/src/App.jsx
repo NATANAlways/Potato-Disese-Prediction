@@ -8,6 +8,7 @@ function App() {
   const [previewUrl, setPreviewUrl] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [fileInputKey, setFileInputKey] = useState(0);
 
   function handleFileChange(event) {
     const file = event.target.files[0];
@@ -52,6 +53,13 @@ function App() {
     }
   }
 
+  function handleClear() {
+    setSelectedFile(null);
+    setPreviewUrl("");
+    setResult(null);
+    setFileInputKey((currentKey) => currentKey + 1);
+  }
+
   return (
     <main className="app">
       <div className="app-header">
@@ -60,9 +68,11 @@ function App() {
       </div>
 
       <ImageUploader
+        fileInputKey={fileInputKey}
         loading={loading}
         onFileChange={handleFileChange}
         onPredict={handlePredict}
+        onClear={handleClear}
         previewUrl={previewUrl}
       />
 

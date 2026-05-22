@@ -7,6 +7,9 @@ __pycache__/
 .ruff_cache/
 .coverage
 htmlcov/
+build/
+dist/
+*.egg-info/
 
 # Virtual environments
 .venv/
@@ -38,9 +41,14 @@ archive(2).zip
 *.pt
 *.mar
 model_store/
+gcp/potato/model_*.pth
 
 # Notebooks
 .ipynb_checkpoints/
+
+# GCP deployment source should not include notebook/cache copies
+gcp/potato/training.ipynb
+gcp/**/__pycache__/
 
 # Frontend dependencies and build output
 frontend/node_modules/
